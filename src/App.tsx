@@ -8,6 +8,7 @@ function App() {
   const [recipes, setRecipes] = useState<Array<Schema["Recipe"]["type"]>>([]);
 
   useEffect(() => {
+
     client.models.Recipe.observeQuery().subscribe({
       next: (data) => setRecipes([...data.items]),
     });
@@ -15,19 +16,46 @@ function App() {
 
   return (
     <main>
-      <h1>My recipes</h1>
-      <ul>
-        {recipes.map((recipe) => (
-          <li key={recipe.id}>{recipe.title}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
+      <section className="hero is-success">
+        <div className="hero-body">
+          <p className="title">Meal Plan</p>
+          <p className="subtitle">Week 1</p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <div className="grid">
+            {recipes.map((recipe) => (
+              <div className="cell" key={recipe.id}>
+                <div className="card">
+                  <div className="card-image">
+                    <figure className="image is-4by3">
+                      <img
+                        src="https://bulma.io/assets/images/placeholders/1280x960.png"
+                        alt="Placeholder image"
+                      />
+                    </figure>
+                  </div>
+                  <div className="card-content">
+                    <div className="media">
+                      <div className="media-content">
+                        <p className="title is-4">{recipe.title}</p>
+                        <p className="subtitle is-6">{recipe.description}</p>
+                      </div>
+                    </div>
+                    <div className="content">
+                      <a href="#">Recipe</a>
+                      <br />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
     </main>
   );
 }
