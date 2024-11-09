@@ -19,7 +19,6 @@ const schema = a.schema({
   Week: a.enum(['week1', 'week2', 'week3']),
   Recipe: a
     .model({
-      recipeId: a.id(),
       title: a.string(),
       description: a.string(),
       instructions: a.string(),
@@ -28,13 +27,17 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
   PlannedMeal: a
     .model({
-      plannedMealId: a.id(),
       day: a.ref('Day'),
       week: a.ref('Week'),
       recipeId: a.id(),
       recipe: a.belongsTo('Recipe', 'recipeId')
     })
     .authorization((allow) => [allow.publicApiKey()]),
+  Program: a
+    .model({
+      name: a.string(),
+      description: a.string(),
+    }).authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

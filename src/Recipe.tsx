@@ -5,12 +5,12 @@ import { generateClient } from "aws-amplify/data";
 const client = generateClient<Schema>();
 
 function App() {
-  const [programs, setPrograms] = useState<Array<Schema["Program"]["type"]>>([]);
+  const [recipes, setRecipes] = useState<Array<Schema["Recipe"]["type"]>>([]);
 
   useEffect(() => {
 
     client.models.Recipe.observeQuery().subscribe({
-      next: (data) => setPrograms([...data.items]),
+      next: (data) => setRecipes([...data.items]),
     });
   }, []);
 
@@ -18,15 +18,15 @@ function App() {
     <main>
       <section className="hero is-success">
         <div className="hero-body">
-          <p className="title">Programs</p>
-          <p className="subtitle">Available Programs</p>
+          <p className="title">Meal Plan</p>
+          <p className="subtitle">Week 1</p>
         </div>
       </section>
       <section className="section">
         <div className="container">
           <div className="grid">
-            {programs.map((program) => (
-              <div className="cell" key={program.id}>
+            {recipes.map((recipe) => (
+              <div className="cell" key={recipe.id}>
                 <div className="card">
                   <div className="card-image">
                     <figure className="image is-4by3">
@@ -39,12 +39,12 @@ function App() {
                   <div className="card-content">
                     <div className="media">
                       <div className="media-content">
-                        <p className="title is-4">{program.name}</p>
-                        <p className="subtitle is-6">{program.description}</p>
+                        <p className="title is-4">{recipe.title}</p>
+                        <p className="subtitle is-6">{recipe.description}</p>
                       </div>
                     </div>
                     <div className="content">
-                      <a href="#">Purchase</a>
+                      <a href="#">Recipe</a>
                       <br />
                     </div>
                   </div>
