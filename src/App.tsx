@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
 
-    client.models.Recipe.observeQuery().subscribe({
+    client.models.Program.observeQuery().subscribe({
       next: (data) => setPrograms([...data.items]),
     });
   }, []);
@@ -23,39 +23,17 @@ function App() {
         </div>
       </section>
       <section className="section">
-        <div className="container">
-          <div className="grid">
-            {programs.map((program) => (
-              <div className="cell" key={program.id}>
-                <div className="card">
-                  <div className="card-image">
-                    <figure className="image is-4by3">
-                      <img
-                        src="https://bulma.io/assets/images/placeholders/1280x960.png"
-                        alt="Placeholder image"
-                      />
-                    </figure>
-                  </div>
-                  <div className="card-content">
-                    <div className="media">
-                      <div className="media-content">
-                        <p className="title is-4">{program.name}</p>
-                        <p className="subtitle is-6">{program.description}</p>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <a href="#">Purchase</a>
-                      <br />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+      {programs.map((program) => (
+        <div>
+          <div>
+          <p>{program.id}</p>
+          <p>{program.name}</p>
+          <p>{program.description}</p>
           </div>
+          <br/>
         </div>
+      ))}
       </section>
-
-
     </main>
   );
 }
